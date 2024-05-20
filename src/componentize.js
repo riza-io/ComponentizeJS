@@ -31,6 +31,8 @@ function maybeWindowsPath (path) {
 }
 
 export async function componentize(jsSource, witWorld, opts) {
+    console.log('--- ComponentizeJS ---');
+
   if (typeof witWorld === 'object') {
     opts = witWorld;
     witWorld = opts?.witWorld;
@@ -314,11 +316,13 @@ export async function componentize(jsSource, witWorld, opts) {
   }
 
   // after wizering, stub out the wasi imports depending on what features are enabled
-  const finalBin = stubWasi(bin, features);
+  console.log('--- Stubbing WASI ---');
+  console.log('>>> skipped');
+  // const finalBin = stubWasi(bin, features);
 
   const component = await metadataAdd(
     await componentNew(
-      finalBin,
+      bin,
       Object.entries({
         wasi_snapshot_preview1: await readFile(preview2Adapter),
       }),
