@@ -10,4 +10,13 @@ example/package-lock.json
 example/hello.component.wasm
 /build-debug
 /build-release
-.vscode
+.vscode# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+mono

@@ -21,7 +21,7 @@ const { version } = JSON.parse(
   await readFile(new URL('../package.json', import.meta.url), 'utf8')
 );
 const isWindows = platform === 'win32';
-const DEBUG_BINDINGS = false;
+const DEBUG_BINDINGS = true;
 const DEBUG_CALLS = false;
 
 function maybeWindowsPath(path) {
@@ -318,13 +318,19 @@ export async function componentize(jsSource, witWorld, opts) {
   }
 
   // after wizering, stub out the wasi imports depending on what features are enabled
-  const finalBin = stubWasi(
-    bin,
-    features,
-    witWorld,
-    maybeWindowsPath(witPath),
-    worldName
-  );
+  console.log('--- Stubbing WASI ---');
+  let finalBin = bin
+  if (false) {
+    finalBin = stubWasi(
+      bin,
+      features,
+      witWorld,
+      maybeWindowsPath(witPath),
+      worldName
+    );
+  } else {
+    console.log('>>> skipped');
+  }
 
   const component = await metadataAdd(
     await componentNew(
